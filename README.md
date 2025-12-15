@@ -1,11 +1,6 @@
-# Task App: Fullstack SaaS Project Tutorial 2025
+# TODOLIST App: Fullstack SaaS Project
 
-A full-stack SaaS task management application built with Next.js and Supabase, featuring AI-powered task labeling, image attachments, and Stripe subscriptions.
-
-- Specific tutorial documents can be found in the `/tutorial` folder.
-- Project design and spec can be found at [tutorial/PROJECT_DESIGN.md](tutorial/PROJECT_DESIGN.md).
-
-![image-app-dashboard](tutorial/images/task-dashboard.png)
+Next.js and Supabase, featuring AI-powered task labeling, image attachments, and Stripe subscriptions.
 
 ## Features
 
@@ -33,60 +28,6 @@ A full-stack SaaS task management application built with Next.js and Supabase, f
   - Supabase
   - OpenAI
   - Stripe (test mode)
-
-### Local Development Setup
-
-1. Clone and install dependencies:
-
-```bash
-# From project root.
-npm install
-```
-
-2. Create environment files - update the values with your keys.
-```bash
-cp .env.example .env.local
-cp .env.example .env.test.local
-```
-
-3. Run development server:
-```bash
-npm run dev
-# Visit http://localhost:3000
-```
-
-At this stage, it won't work well yet because we haven't set up the backend.
-
-### Supabase Setup
-
-1. Create new Supabase project at supabase.com
-
-2. Link project:
-```bash
-supabase init
-supabase link --project-ref your-project-ref
-```
-
-3. Deploy database and functions:
-
-```bash
-# Apply DB migrations
-supabase db push
-
-# Or you can use this command if you need to nuke the DB and reset it.
-# supabase db reset --linked
-
-# Deploy edge functions
-supabase functions deploy create-task-with-ai
-supabase functions deploy create-stripe-session
-supabase functions deploy stripe-webhook
-```
-
-4. Disable `Enforce JWT Verification` ( **Edge Functions > stripe-webhook > Details > Enforce JWT Verification**) for your Stripe webhook Edge Function.
-
-5. Disable email confirmation in Supabase Dashboard:
-   - Authentication > Providers > Email
-   - Uncheck "Confirm email"
 
 ### OpenAI Setup
 
@@ -151,37 +92,6 @@ STRIPE_PRICE_ID=price_...
 STRIPE_WEBHOOK_SECRET=whsec_...
 ```
 
-### Set Supabase Secrets
-
-Your Edge Functions will also need those environment variables. Set them like this:
-
-```bash
-supabase secrets set OPENAI_API_KEY="sk-xxx..."
-supabase secrets set STRIPE_SECRET_KEY=sk_test_xxx
-supabase secrets set STRIPE_PRICE_ID=price_xxx
-supabase secrets set STRIPE_WEBHOOK_SECRET=whsec_xxx
-```
-
-### Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run specific test file
-npm test tests/integration/2_auth.test.ts
-
-# Run specific test case
-npm test tests/integration/5_task_limits.test.ts -- -t "free user cannot exceed task limit"
-```
-
-### Testing Locally
-
-Start development server and go to the local site for testing.
-
-```bash
-npm run dev
-```
 
 ## Project Structure
 
